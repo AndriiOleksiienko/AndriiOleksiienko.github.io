@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <title>Contact us</title>
+</head>
+<body>
+    <header>
+        <div class="header-wrapper">
+            <div class="header-logo"><span id="logo-1">Logo</span><span id="logo-2"> Here</span></div>
+            <div class="header-navigation">
+                <ul>
+                    <li class="navigation-item">Home</li>
+                    <li class="navigation-item">Features</li>
+                    <li class="navigation-item">Blog</li>
+                    <li class="navigation-item">Shop</li>
+                    <li class="navigation-item">About</li>
+                    <li class="navigation-item">Contact</li>
+                    <li class="navigation-item"><img class="account icon" src="images/person.png"></li>
+                    <li class="navigation-item"><img class="cart icon" src="images/cart.png"></li>
+                </ul>
+
+            </div>
+            <div class="fold-out-menu">
+                <img class="icon" src="images/burger.png">
+            </div>
+        </div>
+    </header>
+    <main>
+        <section class="contact-us">
+            <div class="main-text"><span>Contact us</span><br>Any question or remarks? Just write us a message!</div>
+            <section class="contact-form-block-wrapper">
+                <div class="contact-block">
+                    <div class="aside">
+                        <div class="aside-text"><span>Contact information</span><br>Say something to start a live chat!</div>
+                        <div class="aside-contacts">
+                            <div class="contact">
+                                <img src="images/phone.png" class="contact-icon">
+                                <p>+1012 3456 789</p>
+                            </div>
+                            <div class="contact">
+                                <img src="images/mail.png" class="contact-icon">
+                                <p>demo@gmail.com</p>
+                            </div>
+                            <div class="contact">
+                                <img src="images/geo.png" class="contact-icon">
+                                <p>132 Dartmouth Street Boston, Massachusetts 02156 United States</p>
+                            </div>
+                        </div>
+                        <div class="aside-social">
+                            <img src="images/twitter.png" class="contact-icon">
+                            <img src="images/instagram.png" class="contact-icon">
+                            <img src="images/discord.png" class="contact-icon">
+                            <p></p>
+                        </div>
+                    </div>
+                    <form action="" class="contact-form">
+                        <div class="block-1">
+                            <label id="name-label">First Name</label><br>
+                            <input class="input-text" id="name" type="text" placeholder="Will">
+                        </div>
+                        <div class="block-2">
+                            <label>Last Name</label><br>
+                            <input class="input-text" id="last-name" type="text" placeholder="Smith">
+                        </div>
+                        <div class="block-3">
+                            <label>Email</label><br>
+                            <input class="input-text" id="email" type="email" placeholder="willsmith@gmail.com">
+                        </div>
+                        <div class="block-4">
+                            <label>Phone number</label><br>
+                            <input class="input-text" id="phone-number" type="tel" placeholder="+380 00 000 00 00">
+                        </div>
+                        <div class="block-5">
+                            <label>Select Subject</label><br>
+                            <div id="radio-list">
+                                <span><input type="radio" id="contactChoice1" name="contact" value="email" checked="true"/>
+                                <label for="contactChoice1">General Inquiry</label></span>
+                                
+                                <span><input type="radio" id="contactChoice2" name="contact" value="phone" />
+                                <label for="contactChoice2">General Inquiry</label></span>
+                                
+                                <span><input type="radio" id="contactChoice3" name="contact" value="mail" />
+                                <label for="contactChoice3">General Inquiry</label></span>
+
+                                <span><input type="radio" id="contactChoice4" name="contact" value="mail" />
+                                <label for="contactChoice3">General Inquiry</label></span>
+                            </div>
+                            
+                        </div>
+                        <div class="block-6">
+                            <label>Message</label><br>
+                            <input class="input-text" id="message" type="text" placeholder="Write your message..">
+                        </div>
+                        <div class="block-7">
+                            <input type="button" id="Send-message" class="send-button" value="Send message">
+                        </div>
+                    </form>
+                        
+                </div>
+            </section>
+        </section>
+    </main>
+    <footer>
+        <div class="footer-wrapper">
+            <div class="footer-logo"></div>
+            <div class="footer-navigation">
+
+            </div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
