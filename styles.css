@@ -200,9 +200,18 @@ footer{
         padding: 50px 20px 50px 20px;
     }
     .contacts-block {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
         flex-direction: column;
         align-items: center;
         row-gap: 20px;
+    }
+    .contacts-block ul{
+        text-align: center;
+    }
+    .email-phone{
+        grid-column-start: 1;
+        grid-column-end: 3;
     }
 }
 @media(max-width:600px){
