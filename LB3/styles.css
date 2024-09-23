@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+}
+h1{
+    margin: 10px;
+}
+.input-block{
+    display: flex;
+    height: 20px;
+    margin: 10px;
+}
+.input-block *{
+    margin-right: 10px;
+}
+li{
+    margin: 10px;
+}
+li button{
+    margin-left: 10px;
+}
