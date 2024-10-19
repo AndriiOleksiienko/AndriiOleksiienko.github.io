@@ -1,0 +1,16 @@
+#map {
+    margin: 25px auto;
+    height: 600px;
+    width: 80%;
+}
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin: 0 auto;
+}
+.moveButtons{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
