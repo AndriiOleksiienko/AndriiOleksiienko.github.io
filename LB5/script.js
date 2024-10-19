@@ -75,7 +75,10 @@ function degreesToRadians(degrees) {
 
 
 const map = L.map('map').setView([48.943391454671854, 24.731924095723915], 15);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+}).addTo(map);
 
 const marker = L.marker([48.943391454671854, 24.731924095723915]).addTo(map)
     .bindPopup('Ваша поточна локація.')
