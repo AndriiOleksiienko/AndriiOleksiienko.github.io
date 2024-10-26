@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="uk">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Snippets</title>
+    <style>
+        /* Встановлення box-sizing для всіх елементів */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0;
+            padding: 0;
+            transition: background-color 0.2s ease;
+        }
+
+        body:hover {
+            background-color: #e8e8f0;
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            width: 100%;
+            padding: 10px 20px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: center;
+            z-index: 1;
+        }
+
+        #code-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+            gap: 20px;
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-x: hidden;
+            /* Убирає горизонтальний скролл */
+        }
+
+        .code-container {
+            background-color: #333;
+            border-radius: 8px;
+            padding: 20px;
+            /* Зменшено padding для уникнення переповнення */
+            color: #f4f4f9;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            height: 300px;
+            box-sizing: border-box;
+            transition: box-shadow 0.2s, transform 0.2s;
+            opacity: 0;
+            transform: scale(0.9);
+            animation: fadeIn 0.3s forwards ease;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .code-container:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
+        }
+
+        .btn {
+            padding: 4px 8px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.2s, transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.05);
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        .copy-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: #dc3545;
+            color: #fff;
+            width: 24px;
+            height: 24px;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delete-btn:hover {
+            background-color: #c82333;
+        }
+
+        .add-code-btn {
+            background-color: #28a745;
+            color: #fff;
+            font-size: 16px;
+        }
+
+        .add-code-btn:hover {
+            background-color: #218838;
+        }
+
+        h2 {
+            color: #f4f4f9;
+            text-align: center;
+            margin: 0;
+            cursor: pointer;
+            transition: color 0.2s, transform 0.2s;
+        }
+
+        .title-input {
+            font-size: 1.2em;
+            padding: 5px;
+            margin: 0 auto;
+            width: calc(100% - 40px);
+            box-sizing: border-box;
+            color: #333;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            transition: all 0.2s ease;
+            outline: none;
+            text-align: center;
+        }
+
+        textarea {
+            width: 100%;
+            background-color: #333;
+            color: #f4f4f9;
+            border: none;
+            resize: none;
+            font-size: 14px;
+            height: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            font-family: monospace;
+            white-space: pre;
+            overflow: auto;
+        }
+
+        /* Кастомізація повзунків */
+        textarea::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+
+        textarea::-webkit-scrollbar-thumb {
+            background-color: #888;
+            border-radius: 4px;
+        }
+
+        textarea::-webkit-scrollbar-thumb:hover {
+            background-color: #555;
+        }
+
+        textarea::-webkit-scrollbar-track {
+            background-color: #333;
+        }
+
+        textarea {
+            scrollbar-width: thin;
+            scrollbar-color: #888 #333;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <button class="btn add-code-btn" onclick="addCodeBlock()">Додати новий блок коду</button>
+    </header>
+
+    <div id="code-wrapper"></div>
+
+    <script>
+        function addCodeBlock(content = "", title = "Новий блок коду") {
+            const codeContainer = document.createElement("div");
+            codeContainer.className = "code-container";
+
+            const deleteButton = document.createElement("button");
+            deleteButton.className = "btn delete-btn";
+            deleteButton.textContent = "✕";
+            deleteButton.onclick = () => deleteCodeBlock(codeContainer);
+
+            const copyButton = document.createElement("button");
+            copyButton.className = "btn copy-btn";
+            copyButton.textContent = "Copy";
+            copyButton.onclick = () => copyCode(codeContainer.querySelector("textarea"), copyButton);
+
+            const titleElement = document.createElement("h2");
+            titleElement.textContent = title;
+            titleElement.ondblclick = () => editTitle(titleElement);
+
+            const textArea = document.createElement("textarea");
+            textArea.value = content;
+            textArea.oninput = saveChanges;
+
+            codeContainer.appendChild(deleteButton);
+            codeContainer.appendChild(titleElement);
+            codeContainer.appendChild(copyButton);
+            codeContainer.appendChild(textArea);
+
+            document.getElementById("code-wrapper").appendChild(codeContainer);
+
+            saveChanges();
+        }
+
+        function editTitle(titleElement) {
+            const input = document.createElement("input");
+            input.type = "text";
+            input.className = "title-input";
+            input.value = titleElement.textContent;
+
+            input.onblur = () => saveTitle(input, titleElement);
+            input.onkeydown = (e) => {
+                if (e.key === "Enter") saveTitle(input, titleElement);
+            };
+
+            titleElement.replaceWith(input);
+            input.focus();
+        }
+
+        function saveTitle(input, titleElement) {
+            titleElement.textContent = input.value.trim() || "Новий блок коду";
+            input.replaceWith(titleElement);
+            saveChanges();
+        }
+
+        function copyCode(textarea, button) {
+            textarea.select();
+            document.execCommand("copy");
+            button.textContent = "Copied!";
+            setTimeout(() => (button.textContent = "Copy"), 1500);
+        }
+
+        function deleteCodeBlock(container) {
+            container.remove();
+            saveChanges();
+        }
+
+        function saveChanges() {
+            const codeBlocks = Array.from(document.querySelectorAll(".code-container")).map(container => ({
+                title: container.querySelector("h2").textContent,
+                content: container.querySelector("textarea").value
+            }));
+            localStorage.setItem("codeSnippets", JSON.stringify(codeBlocks));
+        }
+
+        window.onload = () => {
+            const savedCodeBlocks = JSON.parse(localStorage.getItem("codeSnippets")) || [];
+            savedCodeBlocks.forEach(({ content, title }) => addCodeBlock(content, title));
+        };
+    </script>
+
+</body>
+
+</html>
