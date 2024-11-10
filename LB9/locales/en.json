@@ -1,0 +1,62 @@
+{
+    "new": "New product",
+    "hit": "Best seller",
+    "inCart": "Add to cart",
+    "soon": "Soon",
+    "products": [
+        {
+            "category": "Soft Toys",
+            "img": "cat.jpg",
+            "title": "Cat",
+            "oldPrice": "",
+            "price": "3.83$",
+            "buttonActive": false,
+            "markType": "new"
+        },
+        {
+            "category": "Soft Toys",
+            "img": "teddy_bear.jpg",
+            "title": "Teddy bear",
+            "oldPrice": "",
+            "price": "2.87$",
+            "buttonActive": true,
+            "markType": "none"
+        },
+        {
+            "category": "Soft Toys",
+            "img": "goose.jpg",
+            "title": "Goose",
+            "oldPrice": "6.72$",
+            "price": "5.76$",
+            "buttonActive": false,
+            "markType": "hit"
+        },
+        {
+            "category": "Soft Toys",
+            "img": "shark.jpg",
+            "title": "Shark",
+            "oldPrice": "",
+            "price": "6$",
+            "buttonActive": true,
+            "markType": "none"
+        },
+        {
+            "category": "Soft Toys",
+            "img": "avocado.jpg",
+            "title": "Avocado",
+            "oldPrice": "",
+            "price": "6.72$",
+            "buttonActive": true,
+            "markType": "none"
+        },
+        {
+            "category": "Soft Toys",
+            "img": "Stitch.jpg",
+            "title": "Stitch",
+            "oldPrice": "",
+            "price": "7.92$",
+            "buttonActive": true,
+            "markType": "none"
+        }
+    ]
+}

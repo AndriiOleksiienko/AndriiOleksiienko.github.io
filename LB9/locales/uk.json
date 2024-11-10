@@ -1,0 +1,63 @@
+{
+    "new": "Новинка",
+    "hit": "Хіт продажів",
+    "inCart": "В корзину",
+    "soon": "Незабаром у продажі",
+    "products": [
+        {
+            "category": "М'які іграшки",
+            "img": "cat.jpg",
+            "title": "Кіт",
+            "oldPrice": "",
+            "price": "159грн",
+            "buttonActive": false,
+            "markType": "new"
+        },
+        {
+            "category": "М'які іграшки",
+            "img": "teddy_bear.jpg",
+            "title": "Ведмедик",
+            "oldPrice": "",
+            "price": "119грн",
+            "buttonActive": true,
+            "markType": "none"
+        },
+        {
+            "category": "М'які іграшки",
+            "img": "goose.jpg",
+            "title": "Гусь",
+            "oldPrice": "279грн",
+            "price": "239грн",
+            "buttonActive": false,
+            "markType": "hit"
+        },
+        {
+            "category": "М'які іграшки",
+            "img": "shark.jpg",
+            "title": "Акула",
+            "oldPrice": "",
+            "price": "249грн",
+            "buttonActive": true,
+            "markType": "none"
+        },
+        {
+            "category": "М'які іграшки",
+            "img": "avocado.jpg",
+            "title": "Авокадо",
+            "oldPrice": "",
+            "price": "279грн",
+            "buttonActive": true,
+            "markType": "none"
+        },
+        {
+            "category": "М'які іграшки",
+            "img": "Stitch.jpg",
+            "title": "Стіч",
+            "oldPrice": "",
+            "price": "329грн",
+            "buttonActive": true,
+            "markType": "none"
+        }
+        
+    ] 
+}
