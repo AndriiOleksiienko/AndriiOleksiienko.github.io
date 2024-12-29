@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Code Snippets</title>
+    <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
+
     <style>
         /* Встановлення box-sizing для всіх елементів */
         *,
@@ -32,12 +34,22 @@
             position: sticky;
             top: 0;
             background-color: #fff;
-            width: 100%;
+            width: 80%;
             padding: 10px 20px;
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             z-index: 1;
+        }
+        @media (max-width:768px) {
+            header{
+                flex-direction: column;
+            }
+            .upload-btn, .download-btn{
+                width: 100%;
+                text-align: center;
+            }
+            
         }
 
         #code-wrapper {
@@ -63,18 +75,9 @@
             height: 300px;
             box-sizing: border-box;
             transition: box-shadow 0.2s, transform 0.2s;
-            opacity: 0;
-            transform: scale(0.9);
-            animation: fadeIn 0.3s forwards ease;
+            opacity: 1;
+            
         }
-
-        @keyframes fadeIn {
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
         .code-container:hover {
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.6);
         }
@@ -102,6 +105,18 @@
 
         .copy-btn:hover {
             background-color: #0056b3;
+        }
+
+        .download-btn {
+            background-color: #1cd579;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .upload-btn{
+            background-color: #1cd579;
+            color: #fff;
+            text-decoration: none;
         }
 
         .delete-btn {
@@ -193,13 +208,25 @@
             scrollbar-width: thin;
             scrollbar-color: #888 #333;
         }
+        .code-container.dragging {
+            opacity: 0.7;
+            background-color: #444;
+        }
+        
+
+
+        
     </style>
 </head>
 
 <body>
 
     <header>
+        <div><button class="btn upload-btn" onclick="triggerFileUpload()">Імпортувати дані</button>
+            <input type="file" id="uploadElem" accept=".json" style="display: none;">
+        </div>
         <button class="btn add-code-btn" onclick="addCodeBlock()">Додати новий блок коду</button>
+        <a class="btn download-btn" id="downloadAnchorElem">Експортувати дані</a>
     </header>
 
     <div id="code-wrapper"></div>
@@ -275,6 +302,8 @@
                 title: container.querySelector("h2").textContent,
                 content: container.querySelector("textarea").value
             }));
+            var dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(codeBlocks));
+            dlAnchorElem.setAttribute("href", dataStr);
             localStorage.setItem("codeSnippets", JSON.stringify(codeBlocks));
         }
 
@@ -282,8 +311,66 @@
             const savedCodeBlocks = JSON.parse(localStorage.getItem("codeSnippets")) || [];
             savedCodeBlocks.forEach(({ content, title }) => addCodeBlock(content, title));
         };
+
+        var dlAnchorElem = document.getElementById('downloadAnchorElem');
+        dlAnchorElem.setAttribute("download", "scene.json");
+
+        const fileInput = document.getElementById("uploadElem");
+
+        function triggerFileUpload() {
+                const fileInput = document.getElementById("uploadElem");
+                fileInput.click();
+            }
+
+            const inputElement = document.getElementById("uploadElem");
+            inputElement.addEventListener("change", handleFiles, false);
+
+            function handleFiles() {
+                if (!confirm("Upload this file?")) {
+                    return;
+                }
+
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = function (event) {
+                        try {
+                            const uploadedData = JSON.parse(event.target.result);
+                            if (Array.isArray(uploadedData)) {
+                                document.getElementById("code-wrapper").innerHTML = ""; // Очистити поточні блоки
+                                uploadedData.forEach(({ content, title }) => addCodeBlock(content, title));
+                            } else {
+                                alert("Файл має неправильний формат.");
+                            }
+                        } catch (error) {
+                            alert("Помилка при читанні файлу: " + error.message);
+                        }
+                    };
+                    reader.readAsText(file);
+                }
+
+                fileInput.value = "";
+            }
+
+        window.onload = () => {
+                const savedCodeBlocks = JSON.parse(localStorage.getItem("codeSnippets")) || [];
+                savedCodeBlocks.forEach(({ content, title }) => addCodeBlock(content, title));
+
+                enableSortable();
+            };
+
+            function enableSortable() {
+                const codeWrapper = document.getElementById("code-wrapper");
+                new Sortable(codeWrapper, {
+                    animation: 150, // Анімація під час перетягування
+                    ghostClass: "dragging", // Додає клас для стилізації
+                    onEnd: saveChanges // Зберігає новий порядок після перетягування
+                });
+            }
+
+
     </script>
 
 </body>
-
+<!-- ОООООООООООООООООООООООООООООООООООООООООООО -->
 </html>
